@@ -1,1 +1,290 @@
 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="بيئة التطوير السحابية الفورية - DevBox Cloud">
+<title>DevBox Cloud - بيئة التطوير السحابية الفورية</title>
+<style>
+:root {
+    --bg-dark: #0f172a;
+    --panel-bg: #1e293b;
+    --border-color: #334155;
+    --text-main: #f8fafc;
+    --accent-color: #38bdf8;
+    --success-color: #10b981;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { background: var(--bg-dark); color: var(--text-main); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+
+/* شريط العلوى الإمبراطوري */
+header {
+    background: #090d16;
+    border-bottom: 2px solid var(--border-color);
+    padding: 12px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand h1 { font-size: 20px; font-weight: 900; color: var(--text-main); letter-spacing: -0.5px; }
+.brand span { background: var(--accent-color); color: #000; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 6px; text-transform: uppercase; }
+
+.header-actions { display: flex; gap: 12px; align-items: center; }
+.btn {
+    background: var(--accent-color);
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+.btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-deploy { background: var(--success-color); color: #fff; }
+
+/* تخطيط مساحة العمل */
+.workspace {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+    padding: 10px;
+    background: #090d16;
+}
+
+.editor-pane {
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.pane-header {
+    background: rgba(0,0,0,0.2);
+    padding: 8px 15px;
+    font-size: 12px;
+    font-weight: bold;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #94a3b8;
+}
+textarea {
+    flex: 1;
+    background: transparent;
+    color: #e2e8f0;
+    border: none;
+    padding: 15px;
+    font-family: 'Fira Code', Consolas, monospace;
+    font-size: 14px;
+    resize: none;
+    outline: none;
+    line-height: 1.6;
+}
+
+/* شاشة المعاينة الحية */
+.preview-pane {
+    grid-row: span 2;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.preview-header {
+    background: #f1f5f9;
+    padding: 8px 15px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #334155;
+    border-bottom: 1px solid #cbd5e1;
+}
+#livePreview {
+    flex: 1;
+    border: none;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+}
+
+footer {
+    background: #05080f;
+    padding: 8px 25px;
+    font-size: 11px;
+    color: #64748b;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="brand">
+        <h1>DevBox Cloud IDE</h1>
+        <span>v2.0 Pro</span>
+    </div>
+    <div class="header-actions">
+        <input type="text" id="projectTitle" placeholder="اسم المشروع أو اللعبة..." style="background:#0f172a; border:1px solid var(--border-color); color:#fff; padding:8px 12px; border-radius:8px; font-size:13px; outline:none; width:200px;">
+        <button class="btn" onclick="runCode()">⚡ تحديث المعاينة</button>
+        <button class="btn btn-deploy" onclick="deployToCloud()">🚀 نشر سحابي فوري</button>
+    </div>
+</header>
+
+<div class="workspace">
+    <!-- محرر HTML -->
+    <div class="editor-pane">
+        <div class="pane-header">HTML Structure</div>
+        <textarea id="htmlCode" placeholder="اكتب كود الـ HTML هنا..."><h1>مرحباً بك في تطبيقك الجديد!</h1>
+<p>برمج، ابتكر، وانشر فوراً عبر سحابة أبو حازم العمري.</p>
+<button onclick="alert('تم التفاعل بنجاح!')">اضغط هنا</button></textarea>
+    </div>
+
+    <!-- محرر CSS -->
+    <div class="editor-pane">
+        <div class="pane-header">CSS Styling</div>
+        <textarea id="cssCode" placeholder="اكتب أكواد التنسيق CSS هنا...">body {
+    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+    color: #1f2937;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    text-align: center;
+    padding: 50px;
+}
+button {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}</textarea>
+    </div>
+
+    <!-- نافذة المعاينة الحية -->
+    <div class="preview-pane">
+        <div class="preview-header">🖥️ نافذة المعاينة الفورية (Live Sandbox)</div>
+        <iframe id="livePreview"></iframe>
+    </div>
+</div>
+
+<footer>
+    DevBox Cloud Engine — هندسة وتطوير: <b>أبو حازم العمري</b>
+</footer>
+
+<script>
+// خوارزمية المعاينة الحية الفائقة السرعة
+function runCode() {
+    const html = document.getElementById('htmlCode').value;
+    const css = document.getElementById('cssCode').value;
+    
+    const combinedContent = `
+        <!DOCTYPE html>
+        <html lang="ar" dir="rtl">
+        <head>
+            <meta charset="UTF-8">
+            <style>${css}</style>
+        </head>
+        <body>
+            ${html}
+        </body>
+        </html>
+    `;
+
+    const iframe = document.getElementById('livePreview');
+    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+    iframeDoc.open();
+    iframeDoc.write(combinedContent);
+    iframeDoc.close();
+}
+
+// تشغيل المعاينة تلقائياً عند فتح الصفحة
+window.onload = runCode;
+
+// تفعيل التحديث التلقائي أثناء الكتابة بذكاء (Debounce Algorithm)
+let timeout;
+document.querySelectorAll('textarea').forEach(el => {
+    el.addEventListener('input', () => {
+        clearTimeout(timeout);
+        timeout = setTimeout(runCode, 300); // تحديث فوري بـ 300 جزء من الثانية
+    });
+});
+
+// خوارزمية النشر السحابي المباشر عبر JSONBin
+async function deployToCloud() {
+    let title = document.getElementById('projectTitle').value.trim();
+    if(!title) {
+        alert('⚠️ الرجاء إدخال اسم المشروع أو اللعبة أولاً!');
+        return;
+    }
+
+    const html = document.getElementById('htmlCode').value;
+    const css = document.getElementById('cssCode').value;
+
+    // دمج الكود في ملف HTML واحد جاهز للتشغيل
+    const finalSource = `<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><style>${css}</style></head><body>${html}</body></html>`;
+    
+    // تحويل الكود إلى Data URI لكي يعمل كرابط مباشر فوري
+    const encodedUri = 'data:text/html;charset=utf-8,' + encodeURIComponent(finalSource);
+
+    const JSONBIN_CONFIG = {
+        apiKey: "$2a$10$Hj8N/vpuugwh9k/pupGakulkBIE4pq3W09JTAUiUKbtJfiWBdpJHS",
+        binId: "6aaa882affd5d160530df70d",
+        baseUrl: "https://api.jsonbin.io/v3/b"
+    };
+
+    try {
+        // جلب البيانات الحالية من السحابة
+        let response = await fetch(`${JSONBIN_CONFIG.baseUrl}/${JSONBIN_CONFIG.binId}/latest`, {
+            headers: { 'X-Master-Key': JSONBIN_CONFIG.apiKey }
+        });
+        let resData = await response.json();
+        let cloudData = resData.record;
+
+        if(!cloudData.games) cloudData.games = [];
+
+        // إضافة المشروع الجديد بقائمة الألعاب
+        cloudData.games.push({
+            id: Date.now(),
+            title: title,
+            dev_name: "أبو حازم العمري",
+            category: "تطبيقات سحابية DevBox",
+            link: encodedUri,
+            status: "تمت الموافقة"
+        });
+
+        // حفظ التحديثات بالسحابة
+        let updateRes = await fetch(`${JSONBIN_CONFIG.baseUrl}/${JSONBIN_CONFIG.binId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Master-Key': JSONBIN_CONFIG.apiKey
+            },
+            body: JSON.stringify(cloudData)
+        });
+
+        if(updateRes.ok) {
+            alert('🚀 تم نشر مشروعك بنجاح وأصبح متاحاً في المنصة الإمبراطورية ومكتبة الألعاب!');
+        } else {
+            alert('❌ حدث خطأ أثناء عملية النشر السحابي.');
+        }
+
+    } catch (err) {
+        console.error(err);
+        alert('❌ تعذر الاتصال بالسيرفر السحابي.');
+    }
+}
+</script>
+</body>
+</html>
