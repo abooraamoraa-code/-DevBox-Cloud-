@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="منصة DevBox Cloud - بيئة التطوير والنشر السحابي الفوري">
+<title>DevBox Cloud — بوابة الإمبراطورية الرقمية</title>
+<style>
+:root {
+    --bg-dark: #0f172a;
+    --panel-bg: #1e293b;
+    --border-color: #334155;
+    --text-main: #f8fafc;
+    --accent-color: #38bdf8;
+    --success-color: #10b981;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { background: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; }
+
+/* شريط القيادة العلوي */
+header {
+    background: #090d16;
+    border-bottom: 2px solid var(--border-color);
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand h1 { font-size: 22px; font-weight: 900; color: var(--text-main); letter-spacing: -0.5px; }
+.brand span { background: var(--accent-color); color: #000; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 6px; text-transform: uppercase; }
+
+.nav-actions { display: flex; gap: 15px; }
+.btn {
+    background: var(--accent-color);
+    color: #000;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 13px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+.btn:hover { opacity: 0.9; transform: translateY(-2px); }
+.btn-outline { background: transparent; border: 1px solid var(--border-color); color: var(--text-main); }
+.btn-outline:hover { background: rgba(255,255,255,0.05); }
+
+/* القسم الرئيسي (Hero Section) */
+.hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.hero-badge {
+    background: rgba(56, 189, 248, 0.1);
+    color: var(--accent-color);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.hero h2 {
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #f8fafc, #38bdf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.hero p {
+    font-size: 18px;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    max-width: 700px;
+}
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* إحصائيات سريعة */
+.stats-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+    margin: 40px auto 0;
+}
+.stat-card {
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+}
+.stat-card h3 { font-size: 28px; color: var(--accent-color); margin-bottom: 5px; font-weight: 900; }
+.stat-card p { font-size: 13px; color: #94a3b8; }
+
+footer {
+    background: #05080f;
+    padding: 20px;
+    font-size: 13px;
+    color: #64748b;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="brand">
+        <h1>DevBox Cloud</h1>
+        <span>الإصدار الإمبراطوري</span>
+    </div>
+    <div class="nav-actions">
+        <a href="community.html" class="btn btn-outline">🌐 المعرض العالمي</a>
+        <a href="editor.html" class="btn">⚡ ابدأ البرمجة الآن</a>
+    </div>
+</header>
+
+<div class="hero">
+    <div class="hero-badge">🚀 منصة التطوير والسحاب الأسرع عالمياً</div>
+    <h2>ابرمج، ابنِ، وانشر ألعابك وتطبيقاتك في جزء من الثانية</h2>
+    <p>بيئة تطوير متكاملة مباشرة داخل المتصفح، مدعومة بخوارزميات ضغط ذكية ومزامنة سحابية فورية تتيح لك مشاركة إبداعاتك مع العالم أجمع بضغطة زر واحدة.</p>
+    
+    <div class="hero-buttons">
+        <a href="editor.html" class="btn" style="padding: 14px 30px; font-size: 15px;">⚡ دخول بيئة التطوير (IDE)</a>
+        <a href="community.html" class="btn btn-outline" style="padding: 14px 30px; font-size: 15px;">🎮 استكشاف مكتبة الألعاب</a>
+    </div>
+
+    <div class="stats-bar">
+        <div class="stat-card">
+            <h3 id="totalProjects">⚡</h3>
+            <p>مشاريع منشورة سحابياً</p>
+        </div>
+        <div class="stat-card">
+            <h3>24/7</h3>
+            <p>استمرارية ومزامنة عالمية</p>
+        </div>
+        <div class="stat-card">
+            <h3>0ms</h3>
+            <p>زمن انتقال المعاينة الفورية</p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    DevBox Cloud Enterprise Engine — الهندسة والإدارة والتطوير: <b>أبو حازم العمري</b>
+</footer>
+
+<!-- استدعاء السحابة لجلب إحصائيات المشاريع الحية -->
+<script src="cloud.js"></script>
+<script>
+async function updateStats() {
+    try {
+        if(typeof DevBoxCloud !== 'undefined') {
+            const projects = await DevBoxCloud.getProjects();
+            document.getElementById('totalProjects').innerText = projects.length || 0;
+        }
+    } catch(e) {
+        document.getElementById('totalProjects').innerText = "∞";
+    }
+}
+window.onload = updateStats;
+</script>
+</body>
+</html>
