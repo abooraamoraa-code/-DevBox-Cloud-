@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="مكتبة ومعرض المشاريع السحابية - DevBox Cloud">
+<title>المكتبة الإمبراطورية - DevBox Cloud</title>
+<style>
+:root {
+    --bg-dark: #0f172a;
+    --panel-bg: #1e293b;
+    --border-color: #334155;
+    --text-main: #f8fafc;
+    --accent-color: #38bdf8;
+    --success-color: #10b981;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { background: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; }
+
+/* شريط العلوى الإمبراطوري */
+header {
+    background: #090d16;
+    border-bottom: 2px solid var(--border-color);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand h1 { font-size: 22px; font-weight: 900; color: var(--text-main); letter-spacing: -0.5px; }
+.brand span { background: var(--accent-color); color: #000; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 6px; text-transform: uppercase; }
+
+.nav-links { display: flex; gap: 15px; }
+.btn {
+    background: var(--accent-color);
+    color: #000;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 13px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+.btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-outline { background: transparent; border: 1px solid var(--border-color); color: var(--text-main); }
+
+/* محتوى المعرض */
+.container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+    flex: 1;
+    width: 100%;
+}
+.section-title {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #f1f5f9;
+}
+.section-desc {
+    color: #94a3b8;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+/* شبكة عرض المشاريع */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+.project-card {
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s, border-color 0.2s;
+}
+.project-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-color);
+}
+.project-info h3 { font-size: 18px; margin-bottom: 8px; color: #fff; }
+.project-info p { font-size: 13px; color: #94a3b8; margin-bottom: 15px; }
+.badge {
+    background: rgba(56, 189, 248, 0.1);
+    color: var(--accent-color);
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    display: inline-block;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.project-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 15px;
+    font-size: 12px;
+    color: #64748b;
+}
+
+.loading { text-align: center; color: var(--accent-color); font-size: 16px; grid-column: span 3; padding: 50px; }
+
+footer {
+    background: #05080f;
+    padding: 15px;
+    font-size: 12px;
+    color: #64748b;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    margin-top: 40px;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="brand">
+        <h1>DevBox Community</h1>
+        <span>المعرض الإمبراطوري</span>
+    </div>
+    <div class="nav-links">
+        <a href="editor.html" class="btn">⚡ العودة لبيئة التطوير</a>
+    </div>
+</header>
+
+<div class="container">
+    <h2 class="section-title">🌐 الألعاب والمشاريع السحابية العالمية</h2>
+    <p class="section-desc">استكشف أحدث الإبداعات البرمجية التي تمت برمجتها ونشرها فوراً عبر منصة DevBox Cloud.</p>
+
+    <div id="projectsContainer" class="projects-grid">
+        <div class="loading">🔄 جاري جلب أحدث المشاريع من السحابة الإمبراطورية...</div>
+    </div>
+</div>
+
+<footer>
+    DevBox Cloud Global Community — هندسة وتطوير: <b>أبو حازم العمري</b>
+</footer>
+
+{/* استدعاء ملف الاتصال السحابي */}
+<script src="cloud.js"></script>
+<script>
+async function loadCommunityProjects() {
+    const container = document.getElementById('projectsContainer');
+    
+    try {
+        // الانتظار حتى يتم تحميل مكتبة السحابة
+        if(typeof DevBoxCloud === 'undefined') {
+            throw new Error("تعذر تحميل محرك الاتصال السحابي.");
+        }
+
+        const projects = await DevBoxCloud.getProjects();
+
+        if(!projects || projects.length === 0) {
+            container.innerHTML = `<div class="loading" style="color:#94a3b8;">لا توجد مشاريع منشورة حتى الآن. كن أول من ينشر عبر بيئة التطوير!</div>`;
+            return;
+        }
+
+        container.innerHTML = ""; // تفريغ رسالة التحميل
+
+        projects.forEach(proj => {
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            card.innerHTML = `
+                <div class="project-info">
+                    <span class="badge">${proj.category || 'تطبيق سحابي'}</span>
+                    <h3>${proj.title}</h3>
+                    <p>تم النشر بواسطة: <b>${proj.dev_name || 'أبو حازم العمري'}</b></p>
+                </div>
+                <div class="project-footer">
+                    <span>${new Date(proj.id || Date.now()).toLocaleDateString('ar-EG')}</span>
+                    <a href="${proj.link}" target="_blank" class="btn" style="padding: 6px 14px; font-size:12px;">🎮 تشغيل فوري</a>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+
+    } catch (err) {
+        console.error(err);
+        container.innerHTML = `<div class="loading" style="color:#ef4444;">❌ فشل الاتصال بالسيرفر السحابي وجلب البيانات.</div>`;
+    }
+}
+
+// تشغيل جلب المشاريع فور فتح الصفحة
+window.onload = loadCommunityProjects;
+</script>
+</body>
+</html>
